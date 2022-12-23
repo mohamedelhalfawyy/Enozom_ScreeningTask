@@ -13,4 +13,4 @@ class CountrySerializer(serializers.ModelSerializer):
 class CountryPopulationSerializer(serializers.ModelSerializer):
     class Meta:
         model = CountryPopulation
-        fields = '__all__'
+        fields = ('year', 'value')
