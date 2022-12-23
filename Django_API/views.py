@@ -1,18 +1,18 @@
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
-from Django_API.serializers import CountrySerializer
+from Django_API.pagination import CustomPagination
 from Django_API.serializers import CountryPopulationSerializer
-
+from Django_API.serializers import CountrySerializer
 from base.models import Country
 from base.models import CountryPopulation
 
 
-@api_view(['GET'])
-def getData(request):
-    countries = Country.objects.all()
-    serializer = CountrySerializer(countries, many=True)
-    return Response(serializer.data)
+class CountryList(ListAPIView):
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializer
+    pagination_class = CustomPagination
 
 
 # Here we get the specific country population depending on the country code
